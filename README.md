@@ -1,4 +1,10 @@
 # Administrador-de-archivos-en-la-nube
 Desarrollar un sistema de archivos en la nube con interfaz de administrador. API REST
 
-Cloud Computing 2018. UDLAP
+Cloud Computing 2018. 
+
+Ricardo Rosas
+Misael Cabrera
+Itzel Tlelo
+Dóminic Hermida
+Arturo Ortíz
