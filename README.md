@@ -3,8 +3,3 @@ Desarrollar un sistema de archivos en la nube con interfaz de administrador. API
 
 Cloud Computing 2018. 
 
-Ricardo Rosas
-Misael Cabrera
-Itzel Tlelo
-Dóminic Hermida
-Arturo Ortíz
