@@ -5,14 +5,19 @@ import (
 	"fmt"
 	"log"
 	"io/ioutil"
+
+	"syscall"
 )
 
 func main() {
 	http.Handle("/", http.FileServer(http.Dir("./public")))
+
 	http.HandleFunc("/upload", upload)
+	http.HandleFunc("/createDirectory", createDirectory)
+
 	log.Println("Running on http://localhost:8081")
 	http.ListenAndServe(":8081", nil)
-}
+}// end main
 
 func upload(w http.ResponseWriter, r *http.Request){
 	
@@ -32,7 +37,7 @@ func upload(w http.ResponseWriter, r *http.Request){
 			return 
 		}
 
-		err = ioutil.WriteFile("./files/"+handle.Filename, data, 0666)
+		err = ioutil.WriteFile("./files"+handle.Filename, data, 0666)
 		if err != nil {
 			log.Printf("Error writing the file %v", err)
 			fmt.Fprint(w, "Error writing the file %v", err)
@@ -40,5 +45,18 @@ func upload(w http.ResponseWriter, r *http.Request){
 		}
 
 		fmt.Fprint(w, "Succesful at loading the file")
-	}//end if	
+	}//end if MethodPost	
 }//end upload
+
+func createDirectory(w http.ResponseWriter, r *http.Request){
+	errDir := syscall.Mkdir("./files/usuario", 0755)
+	
+	if errDir == nil {
+		fmt.Println("Directory created")
+	} else {
+		fmt.Println("Error at creating a directory")
+		fmt.Println(errDir)
+	}
+
+	fmt.Fprint(w, "Succesful at creating a directory")
+}//end createDirectory
