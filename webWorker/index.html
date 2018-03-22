@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html  lang="en">
+    <head>
+        <title>Web Worker</title>
+        <link rel="stylesheet" href="stylesheet.css">
+        <script src="animateprogress.js"></script>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+             
+        <button onclick="iniciarWebWorker()" id="iniciar"> Start webWorker</button>
+        
+        <button onclick="detenerWebWorker()" id="detener"> Finish webWorker</button>
+
+        <p>webWorker working...  <output id= "resultado"></output></p>
+        
+        <input type="button" id="load" value="Begin" />
+       
+        <div class="progress">
+            <p>Loading...</p>
+			<progress id="bar" max="100" value="0"></progress>
+			<span></span>
+		</div>
+        
+        <script type="text/javascript">
+            document.querySelector ("#load").addEventListener ("click", function() { 
+                animateprogress("#bar",100);
+                console.log("Loading...");
+            });
+            
+            var webworker;
+            
+            function iniciarWebWorker(){
+                if(typeof(webworker) == "undefined"){
+                    webworker = new Worker("webWorker.js")
+                    console.log("WebWorker creado");
+                }//end if
+                    
+                webworker.onmessage = function (event) {
+                    document.getElementById("resultado").innerHTML = event.data;
+                    console.log("working: "+event.data);
+                }; //end onmessage
+                    
+                webworker.onerror =function (event){
+                    console.log("Error:" + event.fileName + ", line: " + event.linenno + " " + event.message);  
+                };
+
+            }//end iniciarWebWorker
+
+            function detenerWebWorker(){
+                webworker.terminate();
+                console.log("WebWorker finalizado");
+            }//end detenerWebWorker
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+progress[value] {
+    /* Elimino la apariencia por defecto */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+     
+    /* Quito el borde que aparece en Firefox */
+    border: none;
+ 
+    /* Añado mis propios estilos */
+    width: 270px;
+    height: 30px;
+    overflow:hidden;
+     
+/*  Estos estilos solo se aplicaran al fondo de la barra en mozilla */
+    border:1px inset #666;
+    background-color:#D8D8D8;
+    border-radius : 20px ;
+}
